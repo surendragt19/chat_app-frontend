@@ -11,7 +11,7 @@ import { setMessages } from '../redux/messageSlice';
 
 const Sidebar = () => {
     const [search, setSearch] = useState("");
-    const [isVisible, setIsVisible] = useState(true); // State for visibility
+    const [isVisible, setIsVisible] = useState(true);
     const { otherUsers } = useSelector(store => store.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();

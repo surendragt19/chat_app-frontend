@@ -36,6 +36,9 @@ function App() {
       const socketio = io(`https://chat-app-backend-jps5.onrender.com`, {
           query:{
             userId:authUser._id
+          },
+          auth: { 
+            token: localStorage.getItem('token')
           }
       });
       dispatch(setSocket(socketio));

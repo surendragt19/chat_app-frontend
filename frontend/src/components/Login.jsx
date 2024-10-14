@@ -23,11 +23,21 @@ const Login = () => {
         },
         withCredentials: true
       });
-      navigate("/");
-      console.log(res);
+      localStorage.setItem('token', res.data.token);
       dispatch(setAuthUser(res.data));
+      navigate("/");
+      toast.success('Login successful');
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response) {
+        if (error.response.status === 401) {
+          toast.error('Unauthorized! Please log in.');
+          navigate('/login');
+        } else {
+          toast.error(error.response.data.message || 'Login failed');
+        }
+      } else {
+        toast.error('An error occurred. Please try again.');
+      }
     }
     setUser({
       username: "",

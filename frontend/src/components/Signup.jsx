@@ -28,11 +28,15 @@ const Signup = () => {
         withCredentials: true
       });
       if (res.data.success) {
-        navigate("/login");
         toast.success(res.data.message);
+        navigate("/login");
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response) {
+        toast.error(error.response.data.message || 'Signup failed');
+      } else {
+        toast.error('An error occurred. Please try again.');
+      }
     }
     setUser({
       fullName: "",
